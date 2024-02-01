@@ -6,7 +6,8 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const { DB_HOST, PORT = 3000 } = process.env;
 
-const contactsRouter = require("./routes/index");
+const { contactsRouter } = require("./routes/api/index");
+const { authRouter } = require("./routes/api/index");
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/contacts", contactsRouter);
+app.use('/api/users', authRouter);
 
 app.use((_, res) => {
   res.status(404).json({ message: "Route not found" });

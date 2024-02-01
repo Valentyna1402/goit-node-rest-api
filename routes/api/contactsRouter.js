@@ -1,11 +1,7 @@
 const express = require("express");
-const ctrl = require("../controllers/contacts/index");
-const { validateBody } = require("../helpers/index");
-const {
-  createContactSchema,
-  updateContactSchema,
-  updateFavoriteSchema,
-} = require("../models/index");
+const ctrl = require("../../controllers/index");
+const { validateBody } = require("../../helpers/index");
+const {contactSchemas} = require("../../models/index");
 
 const contactsRouter = express.Router();
 
@@ -15,17 +11,17 @@ contactsRouter.get("/:id", ctrl.getContactById);
 
 contactsRouter.delete("/:id", ctrl.deleteContact);
 
-contactsRouter.post("/", validateBody(createContactSchema), ctrl.createContact);
+contactsRouter.post("/", validateBody(contactSchemas.createContactSchema), ctrl.createContact);
 
 contactsRouter.put(
   "/:id",
-  validateBody(updateContactSchema),
+  validateBody(contactSchemas.updateContactSchema),
   ctrl.updateContact
 );
 
 contactsRouter.patch(
   "/:id/favorite",
-  validateBody(updateFavoriteSchema),
+  validateBody(contactSchemas.updateFavoriteSchema),
   ctrl.updateStatusContact
 );
 
