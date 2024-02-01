@@ -1,16 +1,16 @@
-const contacts = require("../services/contactsServices");
 const HttpError = require("../helpers/HttpError");
 const ctrlWrapper = require("../helpers/ctrlWrapper");
+const { Contact } = require("../models/contact");
 
 const getAllContacts = async (_, res) => {
-  const result = await contacts.listContacts();
+  const result = await Contact.find();
   res.status(200).json(result);
 };
 
 const getContactById = async (req, res) => {
   const { id } = req.params;
-  const result = await contacts.getContactById(id);
-  if (!result) {
+  const result = await Contact.findById(id);
+  if (!result || result.length === 0) {
     throw HttpError(404);
   }
   res.status(200).json(result);
@@ -18,7 +18,7 @@ const getContactById = async (req, res) => {
 
 const deleteContact = async (req, res) => {
   const { id } = req.params;
-  const result = await contacts.removeContact(id);
+  const result = await Contact.findByIdAndDelete(id);
   if (!result) {
     throw HttpError(404);
   }
@@ -26,7 +26,7 @@ const deleteContact = async (req, res) => {
 };
 
 const createContact = async (req, res) => {
-  const result = await contacts.addContact(req.body);
+  const result = await Contact.create(req.body);
   if (!result) {
     throw HttpError(404);
   }
@@ -35,12 +35,21 @@ const createContact = async (req, res) => {
 
 const updateContact = async (req, res) => {
   const { id } = req.params;
-  const result = await contacts.updateContactById(id, req.body);
+  const result = await Contact.findByIdAndUpdate(id, req.body, { new: true });
   if (!result) {
     throw HttpError(404);
   }
   if (!req.body || Object.keys(req.body).length === 0) {
     throw HttpError(400, "Body must have at least one field");
+  }
+  res.status(200).json(result);
+};
+
+const updateStatusContact = async (req, res) => {
+  const { id } = req.params;
+  const result = await Contact.findByIdAndUpdate(id, req.body, { new: true });
+  if (!result) {
+    throw HttpError(404);
   }
   res.status(200).json(result);
 };
@@ -51,4 +60,5 @@ module.exports = {
   deleteContact: ctrlWrapper(deleteContact),
   createContact: ctrlWrapper(createContact),
   updateContact: ctrlWrapper(updateContact),
+  updateStatusContact: ctrlWrapper(updateStatusContact),
 };
