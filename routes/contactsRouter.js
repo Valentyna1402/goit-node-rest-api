@@ -1,12 +1,11 @@
 const express = require("express");
-const ctrl = require("../controllers/contactsControllers");
-
-const validateBody = require("../helpers/validateBody");
+const ctrl = require("../controllers/contacts/index");
+const { validateBody } = require("../helpers/index");
 const {
   createContactSchema,
   updateContactSchema,
   updateFavoriteSchema,
-} = require("../models/contact");
+} = require("../models/index");
 
 const contactsRouter = express.Router();
 

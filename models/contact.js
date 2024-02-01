@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const handleMongooseError = require("../helpers/handlerMongooseError");
+const { handleMongooseError } = require("../helpers/index");
 
 const Joi = require("joi");
 
