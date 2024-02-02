@@ -1,8 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const { User } = require("../../models/index");
-const { HttpError } = require("../../helpers/index");
+const { User } = require("../../models");
+const { HttpError } = require("../../helpers");
 const { SECRET_KEY } = process.env;
 
 const loginUser = async (req, res) => {
@@ -22,7 +22,7 @@ const loginUser = async (req, res) => {
   };
 
   const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
-  res.status(200).json({ token });
+  res.status(200).json({ token, user });
 };
 
 module.exports = loginUser;

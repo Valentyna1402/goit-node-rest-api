@@ -6,8 +6,8 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const { DB_HOST, PORT = 3000 } = process.env;
 
-const { contactsRouter } = require("./routes/api/index");
-const { authRouter } = require("./routes/api/index");
+const { contactsRouter } = require("./routes/api");
+const { authRouter } = require("./routes/api");
 
 const app = express();
 

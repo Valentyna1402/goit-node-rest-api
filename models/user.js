@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const { handleMongooseError } = require("../helpers/index");
+const { handleMongooseError } = require("../helpers");
 
 const Joi = require("joi");
 
@@ -9,7 +9,6 @@ const userSchema = new Schema(
   {
     name: {
     type: String,
-    required: [true, "Set name for user"],
   },
     password: {
       type: String,
@@ -27,7 +26,9 @@ const userSchema = new Schema(
       enum: ["starter", "pro", "business"],
       default: "starter",
     },
-    token: String,
+    token: {
+      type: String
+    },
   },
   { versionKey: false, timestamps: true }
 );
