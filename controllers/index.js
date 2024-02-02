@@ -10,6 +10,7 @@ const updateStatusContact = require("./contacts/updateStatusContact");
 const registerUser = require("./users/registerUser");
 const loginUser = require("./users/loginUser");
 const getCurrentUser = require("./users/getCurrentUser");
+const logoutUser = require("./users/logoutUser");
 
 module.exports = {
   getAllContacts: ctrlWrapper(getAllContacts),
@@ -21,4 +22,5 @@ module.exports = {
   registerUser: ctrlWrapper(registerUser),
   loginUser: ctrlWrapper(loginUser),
   getCurrentUser: ctrlWrapper(getCurrentUser),
+  logoutUser: ctrlWrapper(logoutUser),
 };
