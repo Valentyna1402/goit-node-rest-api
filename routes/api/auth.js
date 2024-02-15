@@ -11,6 +11,8 @@ authRouter.post('/login', validateBody(userSchemas.loginSchema), ctrl.loginUser)
 authRouter.get('/current', authenticate, ctrl.getCurrentUser);
 authRouter.post('/logout', authenticate, ctrl.logoutUser);
 authRouter.patch('/:id/subscription', authenticate, validateBody(userSchemas.updateSubscriptionSchema), ctrl.updateSubscriptionUser);
-authRouter.patch('/avatars', authenticate, upload.single('avatar'), ctrl.updateAvatar)
+authRouter.patch('/avatars', authenticate, upload.single('avatar'), ctrl.updateAvatar);
+authRouter.get('/verify/:verificationToken', ctrl.verifyEmail);
+authRouter.post('/verify', validateBody(userSchemas.emailSchema), ctrl.resendVerifyEmail)
 
 module.exports = authRouter;
