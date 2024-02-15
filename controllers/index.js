@@ -11,7 +11,8 @@ const registerUser = require("./users/registerUser");
 const loginUser = require("./users/loginUser");
 const getCurrentUser = require("./users/getCurrentUser");
 const logoutUser = require("./users/logoutUser");
-const updateSubscriptionUser = require('./users/updateSubscriptionUser')
+const updateSubscriptionUser = require('./users/updateSubscriptionUser');
+const updateAvatar = require('./users/updateAvatar');
 
 module.exports = {
   getAllContacts: ctrlWrapper(getAllContacts),
@@ -25,4 +26,5 @@ module.exports = {
   getCurrentUser: ctrlWrapper(getCurrentUser),
   logoutUser: ctrlWrapper(logoutUser),
   updateSubscriptionUser: ctrlWrapper(updateSubscriptionUser),
+  updateAvatar: ctrlWrapper(updateAvatar),
 };
